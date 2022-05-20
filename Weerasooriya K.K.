@@ -1,0 +1,197 @@
+//Weerasooriya K.K. IT21316272
+//header file of user
+
+class User
+{
+protected:
+	char userName[30];
+	char password[10];
+	char name[60];
+	char reg_date[12];
+	char address[60];
+public:
+	User();
+	User(const char uName[], const char pw[], const char nameU[], const char r_Date[], const char add[]);
+	void registerSystem();
+	void validayeLogin();
+	void displayDetails();
+	~User();
+};
+
+//header file of RegisteredCustomer
+
+#include"User.h"
+#include"DeliveryRider.h"
+#include"Menu.h"
+#include"MenuItems.h"
+#include"Feedback.h"
+#include"Order.h"
+#include"CartDetails.h"
+#include"Restaurant.h"
+
+class RegisteredCustomer
+{
+private:
+	int cus_ID;
+	char cus_Email[20];
+	int cus_Contact;
+	int pay_ID;
+
+	Menu*menu1; //uni directional association with menu class
+	MenuItems*menuitem; //uni directional association with MenuItems class
+
+	Feedback * FB[50]; //COMPOSITION 
+
+	Order*OR[50]; // COMPOSITION 
+
+	CartDetails* Cart[50];//COMPOSITION 
+
+	DeliveryRider* delR; //uni directional association with DeliverRider class
+
+	Restaurant *rest; //uni directional association with Restaurant class
+
+public:
+	RegisteredCustomer();
+
+	RegisteredCustomer(int c_ID, const char c_Email[], int c_contact, int p_Id, const char nameU[], const char pw[], const char r_Date[], const char uName[], const char add[]);
+	void displayCustomerDetails();
+
+	void setPayment();
+
+	void displayPayDetails();
+
+	void updateProfile();
+
+	~RegisteredCustomer();
+
+};
+
+//header file of Admin
+
+#include"Restaurant.h"
+#include"DeliveryRider.h"
+#include"Feedback.h"
+#include"RegisteredCustomer.h"
+
+class Admin
+{
+private:
+	int admin_ID;
+	char admin_Name[50];
+
+	RegisteredCustomer *regCus; //uni directional relationship with RegisteredCustomer class
+
+	DeliveryRider *DR;//uni directional relationship with DeliveryRider class
+	
+	Restaurant * Res;//uni directional relationship with Restaurant class
+
+	Feedback * fb;////uni directional relationship with Feddback class
+
+public:
+	Admin();
+	Admin(int aID, const char aName[]);
+	void displayAdminDetails();
+	~Admin();
+
+};
+
+//Implementation of user class
+
+#include "User.h"
+#include<iostream>
+#include<cstring>
+using namespace std;
+User::User()
+{
+	strcpy(userName, "");
+	strcpy(password, "");
+	strcpy(name, "");
+	strcpy(reg_date, "");
+	strcpy(address, "");
+}
+User::User(const char uName[], const char pw[], const char nameU[], const char r_Date[], const char add[])
+{
+	strcpy(userName, uName);
+	strcpy(password, pw);
+	strcpy(name, nameU);
+	strcpy(reg_date, r_Date);
+	strcpy(address, add);
+}
+void User::registerSystem()
+{
+}
+void User::validayeLogin() {
+}
+
+void User::displayDetails()
+{
+	cout << "UserName: " << userName << endl;
+	cout << "Password: " << password << endl;
+	cout << "Name: " << name << endl;
+	cout << "Registerd date: " << reg_date << endl;
+	cout << "Adress: " << address << endl << endl;
+}
+User::~User()
+{
+}
+
+//Implementation file of RegisteredCustomer class
+
+#include "RegisteredCustomer.h"
+#include<iostream>
+#include"User.h"
+using namespace std;
+RegisteredCustomer::RegisteredCustomer() {
+	cus_ID = 0;
+	strcpy(cus_Email, "");
+	cus_Contact = 0;
+	pay_ID = 0;
+}
+RegisteredCustomer::RegisteredCustomer(int c_ID, const char c_Email[], int c_contact, int p_Id, const char nameU[], const char add[], const char pw[],const char r_Date[], const char uName[]):User(uName, pw, nameU, r_Date, add)
+{
+	cus_ID = c_ID;
+	strcpy(cus_Email, c_Email);
+	cus_Contact = c_contact;
+	pay_ID = p_Id;
+}
+void RegisteredCustomer::displayCustomerDetails() 
+{
+	cout << "Customer ID: " << cus_ID << endl;
+	cout << "E mail: " << cus_Email << endl;
+	cout << "Contact No: " << cus_Contact << endl;
+	cout << "Payment Id: " << pay_ID << endl << endl;
+}
+void RegisteredCustomer::setPayment()
+{
+}
+void RegisteredCustomer::displayPayDetails()
+{
+}
+void RegisteredCustomer::updateProfile()
+{
+}
+
+RegisteredCustomer::~RegisteredCustomer() {
+}
+
+//Implementation file of Admin
+
+#include "Admin.h"
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+Admin::Admin() {
+	admin_ID = 0;
+	strcpy(admin_Name, "");
+}
+Admin::Admin(int aID, const char aName[]) {
+	admin_ID = aID;
+	strcpy(admin_Name, aName);
+}
+void Admin::displayAdminDetails() {
+	cout << "Admin ID: " << admin_ID << endl;
+	cout << "Admin name: " << admin_Name << endl;
+}
+Admin::~Admin() {
+}
