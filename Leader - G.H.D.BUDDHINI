@@ -1,0 +1,337 @@
+//IT21208508_G.H.D.BUDDHINI
+
+//header file of Order class (Order.h)
+#include"CartDetails.h"
+class Order
+{
+private:
+	int OrderID;
+	int cus_ID;
+	char cusName[30];
+	char orderDate[20];
+public:
+	Order();//default constructor
+
+	Order(int or_ID, int c_ID, const char cname[], const char or_date[]);//overloaded constructor
+
+	void receiveCartDetails(int qty, int CartID, CartDetails*Cart);//DEPENDANCY(depend on CartDetails class)
+
+	void displayOrderInfo();
+
+	~Order(); //destructor
+};
+
+//header file of OrderDetails class (OrderDetails.h)
+
+
+#include"Order.h"
+#include"Payment.h"
+#define MAX_SIZE 20
+
+class OrderDetails
+{
+private:
+	float deliveryCharges;
+	char billingAddress[100];
+	char deliveryAddress[100];
+	char orderStatus[30];
+	Order* C_orders[MAX_SIZE]; //compositition relationship between Order and OrderDetails
+
+	Payment*pay[10];//because there is a composition between OrderDetails and payment class
+	
+public:
+
+	OrderDetails();//default constructor
+	OrderDetails(float delCh, const char b_Add[], const char del_Add[], const char or_Stat[]);//overloaded constructor
+	float calTotalAmount();
+	float displayTotalAmount();
+	void displayOrderDetails();
+	~OrderDetails();//destructor
+};
+
+//header file of CartDetails class (CartDetails.h)
+
+#include"MenuItems.h"
+class CartDetails
+{
+	private:
+		int cart_ID;
+		int qty;
+		float currentAmount;
+
+	public:
+		
+		CartDetails();//default constructor
+
+		CartDetails(int cartID, int c_qty, float amount);//overloaded constructor
+
+		void saveItems(int I_id, float I_price, char I_Des, MenuItems *Menu);//DEPENDANCY(depend on MenuItems class)
+
+		void displayCartDetails();
+
+		~CartDetails();//destructor
+	
+};
+
+//implementation
+
+//Order.cpp
+#include "Order.h"
+#include"CartDetails.h"
+#include<iostream>
+using namespace std;
+Order::Order()
+{
+	OrderID = 0;
+	cus_ID = 0;
+	strcpy(cusName, " ");
+	strcpy(orderDate, " ");
+}
+Order::Order(int or_ID, int c_ID, const char cname[], const char or_date[])
+{
+	OrderID = or_ID;
+	cus_ID = c_ID;
+	strcpy(cusName, cname);
+	strcpy(orderDate, or_date);
+}
+void Order::receiveCartDetails(int qty, int CartID, CartDetails * Cart)
+{
+}
+void Order::displayOrderInfo()
+{
+}
+
+Order::~Order()
+{
+}
+
+//OrderDetails.cpp
+
+#include "OrderDetails.h"
+#include"Payment.h"
+#include<cstring>
+using namespace std;
+
+OrderDetails::OrderDetails()
+{
+	deliveryCharges = 0.0;
+	strcpy(billingAddress, " ");
+	strcpy(deliveryAddress, " ");
+	strcpy(orderStatus, " ");
+}
+OrderDetails::OrderDetails(float delCh, const char b_Add[], const char
+	del_Add[], const char or_Stat[])
+{
+	deliveryCharges = delCh;
+	strcpy(billingAddress, b_Add);
+	strcpy(deliveryAddress, del_Add);
+	strcpy(orderStatus, or_Stat);
+}
+float OrderDetails::calTotalAmount()
+{
+	return 0;
+}
+float OrderDetails::displayTotalAmount()
+{
+	
+
+	return 0;
+}
+void OrderDetails::displayOrderDetails()
+{
+}
+OrderDetails::~OrderDetails()
+{
+}
+
+//CartDetails.cpp
+
+#include "CartDetails.h"
+#include"MenuItems.h"
+
+CartDetails::CartDetails()
+{
+	cart_ID = 0;
+	qty = 0;
+	currentAmount = 0.0;
+}
+CartDetails::CartDetails(int cartID, int c_qty, float amount)
+{
+	cart_ID = cartID;
+	qty = c_qty;
+	currentAmount = amount;
+}
+void CartDetails::saveItems(int I_id, float I_price, char I_Des, MenuItems * Menu)
+{
+}
+void CartDetails::displayCartDetails()
+{
+}
+CartDetails::~CartDetails()
+{
+}
+
+
+//Main Program
+
+#include <iostream>
+#include<cstring>
+#include"User.h"
+#include"Restaurant.h"
+#include"RegisteredCustomer.h"
+#include"Payment.h"
+#include"OrderDetails.h"
+#include"Order.h"
+#include"MenuItems.h"
+#include"Menu.h"
+#include"Feedback.h"
+#include"DeliveryRider.h"
+#include"DebitCards.h"
+#include"CreditCards.h"
+#include"COD.h"
+#include"CartDetails.h"
+#include"Admin.h"
+using namespace std;
+int main()
+{
+	//creating dynamic objects for User
+	User* U1;
+	U1 = new User("Kamal", "U5412987", "kamal gamage", "10 may 2021", "123 / 4, Kandy Rd"); //Create User object
+	//Method Calling
+	U1->displayDetails();
+	U1->registerSystem();
+	U1->validayeLogin();
+
+	//creating dynamic objects for RegisteredCustomer
+	RegisteredCustomer* R1;
+	//Method Calling
+	R1 = new RegisteredCustomer(646466, "smn@gmail.com", 0713214211, 542365,
+		"Kamal", "U5412987", "kamal gamage", "10 may 2021", "123 / 4, Kandy Rd");
+
+	//Create RegisteredCustomer object
+	R1->displayCustomerDetails();
+	R1->displayPayDetails();
+	R1->setPayment();
+	R1->updateProfile();
+
+	//creating dynamic objects for DeliveryRider
+	DeliveryRider* d1;
+	//Method Calling
+	d1 = new DeliveryRider(4, "saman@gmailcom", "912342492V", "12345678d","Shiped", "Apex Business Academy (pvt) Ltd.Rahula Road,Matara", "The Doctor's House 87, Beach Road, Madiha, Matara 81000", "saman", "saman@123", 2021 / 05 /31, "samanP");
+	d1->displayDelRiderDetails();
+	d1->displayDeliStatus();
+
+
+	//creating dynamic objects for resturant class
+	Restaurant *res1;
+	//Method Calling
+	res1 = new Restaurant("Doctor's House'",123,"doctor'shouse'@gmail.com",0776512345,"doctors house","123@doctor's house","Kamal",2000/02/22,"Kalidasaroad, Matara"); //create objects for Menu class
+	res1->displayResDetails();
+
+	//creating dynamic objects for Menu class 
+	
+	Menu *m1;
+	//Method Calling
+
+	m1 = new Menu(3, "Sous vide"); //set values Menu class
+	m1->displayMenuDetails();
+
+	//create dynamic objects for MenuItems class 
+	MenuItems *mItems1;
+	//Method Calling
+	mItems1 = new MenuItems(3, 350.00, "Soft texturessmooth,silky,unctuous,coating,tender and juicy"); //create objects for 
+	//MenuItems class
+		mItems1->dispalyItems();
+
+
+	//creating dynamic objects for Order class
+	Order* order1 = new Order();
+	Order *order2 = new Order();
+	//Method Calling
+	order1->displayOrderInfo();
+	order2->displayOrderInfo();
+
+
+	//creating dynamic objects for OrderDetails class
+	OrderDetails *myOrderDetails;
+	myOrderDetails = new OrderDetails(350.00, "Alawella Rd,Matara", "101 Uyanwatta, Matara", "Shipped");
+		//Method Calling
+	myOrderDetails->displayOrderDetails();
+	myOrderDetails->displayTotalAmount();
+
+
+	//creating dynamic objects for CartDetails class
+	CartDetails *CD1 = new CartDetails(0001, 05, 1200.00);
+	CartDetails *CD2 = new CartDetails(0002, 03, 2000.00);
+	//Method Calling
+	CD1->displayCartDetails();
+	CD2->displayCartDetails();
+
+
+	//creating objects for Payment ,COD,CreditCards, DebitCards classes
+	Payment *p1;
+	p1 = new Payment(0001, "cashOnDelivery", 1500, "2022 / 5 / 10"); //set values to p1 object
+
+	COD *c1;
+	c1 = new COD(0001, "cashOnDelivery", 1500, "2022 / 5 / 10", "Nimal","20/1,Araliya Mawatha,Matara", 2000, 2000);
+
+	CreditCards *cc1;
+	
+	cc1 = new CreditCards(0001, "cashOnDelivery", 1500, "2022 / 5 / 10", 0001,"Kamal", 14669, "2024 / 6 / 7");
+
+	DebitCards* dc1;
+
+	dc1 = new DebitCards(0001, "cashOnDelivery", 1500, "2022 / 5 / 10", 001,"Amal", 89567, "2023 / 7 / 27");
+
+	//method calling
+	p1->displayPayDetails(); //payment class
+
+	c1->updatePayStatus(); //COD class
+	c1->displayCODDetails();
+	c1->calcBalance();
+
+	cc1->validateCardDetails(); //CreditCards class
+	cc1->displayCardDetails();
+	cc1->displayTotalAmount();
+
+	dc1->validateCardDetails(); //DebitCard class
+	dc1->displayTotalamount();
+	dc1->displayDebitCardDetails();
+
+	//create dynamic objects for Admin
+	Admin* A1;
+	A1 = new Admin(9545212, "Kumara Weerasekara");
+	A1->displayAdminDetails();
+
+	//create dynamic objects for Feedback
+	Feedback *f1;
+	f1 = new Feedback(21, "Nimal Perera", "Amaazing food!");
+	f1->displayFeedBackDetails();
+
+	//Delete Dynamic objects
+	delete U1;
+	delete R1;
+	delete A1;
+	//delete objects
+	delete p1;
+	delete c1;
+	delete cc1;
+	delete dc1;
+	//Delete Dynamic objects
+	delete myOrderDetails;
+	delete order1;
+	
+	delete order2;
+	delete CD1;
+	delete CD2;
+	//Delete Dynamic objects of feedback class and deliveryRider class
+	delete f1;
+	delete d1;
+	//delete objects
+	delete res1;
+	delete m1;
+	delete mItems1;
+
+
+	return 0;
+}
