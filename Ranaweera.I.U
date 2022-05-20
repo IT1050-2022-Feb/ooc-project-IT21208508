@@ -1,0 +1,133 @@
+//Ranaweera.I.U IT21315732
+
+
+//Class delivery rider
+
+#include"User.h"
+#include"Restaurant.h"
+class DeliveryRider
+{
+private:
+	int dr_ID;
+	char dr_Email[50];
+	char dr_NIC[20];
+	char dr_License[20];
+	char del_Status[20];
+	char cus_Address[100];
+	char res_Address[100];
+
+	COD *cashODe; //uni directional association with COD class
+
+
+
+public:
+	DeliveryRider(); //default constructor
+	DeliveryRider(int dR_id, const char dR_Email[], const char dR_NIC[], const char dr_lic[], const char delSt[], const char c_Add[], const char Res_Add[], const char uName[], const char pw[], const char nameU[], const char r_Date[], const char add[]); //overloaded constructor
+	
+	void receiveResDetails(int R_contact, Restaurant *res1);
+
+	void setResLocation();
+
+	void setCusLocation();
+
+	void setDeliveryStatus();
+
+	void displayDelRiderDetails();
+
+	void displayDeliStatus();
+
+	~DeliveryRider(); //destructor
+};
+
+//class Feedback
+
+class Feedback
+{
+private:
+	int feedback_ID;
+	char cus_Name[30];
+	char feedback_Message[500];
+public:
+	Feedback(); //default constructor
+	Feedback(int f_ID, const char c_name[], const char msg[]); //overloaded constructor
+	void displayFeedBackDetails();
+	~Feedback(); //destructor
+};
+
+
+//implementation of Delivery Rider class
+
+
+#include "DeliveryRider.h"
+#include<iostream>
+#include"User.h"
+#include"Restaurant.h"
+using namespace std;
+
+DeliveryRider::DeliveryRider()
+{
+	dr_ID = 0;
+	strcpy(dr_Email, " ");
+	strcpy(dr_NIC, " ");
+	strcpy(dr_License, " ");
+	strcpy(del_Status, " ");
+	strcpy(cus_Address, " ");
+	strcpy(res_Address, " ");
+}
+DeliveryRider::DeliveryRider(int dR_id, const char dR_Email[], const char dR_NIC[], const char dr_lic[], const char delSt[], const char c_Add[], const char Res_Add[], const char uName[], const char pw[], const char nameU[], const char r_Date[], const char add[])
+{
+	dr_ID = dR_id;
+	strcpy(dr_Email, dR_Email);
+	strcpy(dr_NIC, dR_NIC);
+	strcpy(dr_License, dr_lic);
+	strcpy(del_Status, delSt);
+	strcpy(cus_Address, c_Add);
+	strcpy(res_Address, Res_Add);
+}
+
+void DeliveryRider::receiveResDetails(int R_contact, Restaurant * res1)
+{
+}
+
+void DeliveryRider::setResLocation()
+{
+}
+void DeliveryRider::setCusLocation()
+{
+}
+void DeliveryRider::setDeliveryStatus()
+{
+}
+void DeliveryRider::displayDelRiderDetails() {
+}
+
+void DeliveryRider::displayDeliStatus()
+{
+}
+DeliveryRider::~DeliveryRider()
+{
+}
+
+
+//implementation of Feedbackclass
+
+#include "Feedback.h"
+#include<cstring>
+Feedback::Feedback()
+{
+	feedback_ID = 0;
+	strcpy(cus_Name, " ");
+	strcpy(feedback_Message, " ");
+}
+Feedback::Feedback(int f_ID, const char c_name[], const char msg[])
+{
+	feedback_ID = f_ID;
+	strcpy(cus_Name, c_name);
+	strcpy(feedback_Message, msg);
+}
+void Feedback::displayFeedBackDetails()
+{
+}
+Feedback::~Feedback()
+{
+}
