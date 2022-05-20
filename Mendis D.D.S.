@@ -1,0 +1,207 @@
+//IT21204098_Mendis D.D.S.
+
+//class definitions
+
+//Payment-parent class
+class Payment
+{
+protected:
+	int pay_ID;
+	char paymentType[20];
+	float total_amount;
+	char pay_Date[15];
+public:
+	Payment(); //default constructor
+	Payment(int p_ID, const char p_Type[], float tot_Amount, const char p_date[]); //overloaded constructor
+	void displayPayDetails();
+	~Payment(); //destructor
+
+};
+
+
+//COD(child class) class
+#include"Payment.h"
+class COD
+{
+private:
+	char cus_Name[30];
+	char cus_Address[50];
+	float total_pay;
+	float payed_Amount;
+public:
+	COD();
+	COD(int p_ID, const char p_Type[], float tot_Amount, const char p_date[],const char cName[], const char cAdd[], float tot_pay, float p_amount);
+	void updatePayStatus();
+	void displayCODDetails();
+	float calcBalance();
+	~COD();
+
+};
+
+//CreditCards(child class) class
+#include"Payment.h"
+class CreditCards
+{
+private:
+	int cardNo;
+	char cardHolderName[30];
+	int cvv;
+	char expiryDate[15];
+	
+public:
+	CreditCards(); //default constructor
+	CreditCards(int p_ID, const char p_Type[], float tot_Amount, const char p_date[], int cNo, const char cHname[], int c_cvv, const char exDate[]); ////overloaded constructor
+	void validateCardDetails();
+	void displayCardDetails();
+	void displayTotalAmount();
+	~CreditCards(); //destructor
+
+};
+
+//DebitCards(child class) class
+#include"Payment.h"
+class DebitCards
+{
+private:
+	int cardNo;
+	char cardHolderName[30];
+	int cvv;
+	char expiryDate[15];
+public:
+	DebitCards(); //default constructor
+	DebitCards(int p_ID, const char p_Type[], float tot_Amount, const char p_date[], int cNo, const char dHname[], int d_cvv, const char exDate[]); ////overloaded constructor
+	void validateCardDetails();
+	void displayTotalamount();
+	void displayDebitCardDetails();
+	~DebitCards(); //destructor
+};
+
+
+//method implementation
+
+//Payment class
+#include "Payment.h"
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+Payment::Payment()
+{
+	strcpy(paymentType, " ");
+	total_amount = 0.0;
+}
+
+Payment::Payment(int p_ID, const char p_Type[], float tot_Amount, const char p_date[])
+{
+	strcpy(paymentType, p_Type);
+	total_amount = tot_Amount;
+}
+void Payment::displayPayDetails()
+{
+}
+Payment::~Payment()
+{
+}
+
+
+//COD class
+#include "COD.h"
+#include"Payment.h"
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+COD::COD()
+{
+	strcpy(cus_Name, " ");
+	strcpy(cus_Address, " ");
+	total_pay = 0.0;
+	payed_Amount = 0.0;
+}
+COD::COD(int p_ID, const char p_Type[], float tot_Amount, const char p_date[],const char cName[], const char cAdd[], float tot_pay, float p_amount) :Payment(p_ID, p_Type, tot_Amount, p_date)
+{
+	strcpy(cus_Name, cName);
+	strcpy(cus_Address, cAdd);
+	total_pay = tot_pay;
+	payed_Amount = p_amount;
+}
+void COD::updatePayStatus()
+{
+}
+void COD::displayCODDetails()
+{
+}
+float COD::calcBalance()
+{
+	return 0;
+}
+COD::~COD()
+{
+}
+
+//CreditCards class
+#include<cstring>
+using namespace std;
+
+CreditCards::CreditCards()
+{
+	cardNo = 0;
+	strcpy(cardHolderName, " ");
+	cvv = 0;
+	strcpy(expiryDate, " ");
+}
+CreditCards::CreditCards(int p_ID, const char p_Type[], float tot_Amount,
+	const char p_date[], int cNo, const char cHname[], int c_cvv, const char exDate[]) : Payment(p_ID, p_Type, tot_Amount, p_date)
+{
+	cardNo = cNo;
+	strcpy(cardHolderName, cHname);
+	cvv = c_cvv;
+	strcpy(expiryDate, exDate);
+}
+void CreditCards::validateCardDetails()
+{
+}
+void CreditCards::displayCardDetails()
+{
+}
+void CreditCards::displayTotalAmount()
+{
+}
+CreditCards::~CreditCards()
+{
+}
+
+
+//DebitCards class
+#include "DebitCards.h"
+#include"Payment.h"
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+DebitCards::DebitCards()
+{
+	cardNo = 0;
+	strcpy(cardHolderName, " ");
+	cvv = 0;
+	strcpy(expiryDate, " ");
+}
+DebitCards::DebitCards(int p_ID, const char p_Type[], float tot_Amount, const char p_date[], int cNo, const char dHname[], int d_cvv, const char exDate[]) :Payment(p_ID, p_Type, tot_Amount, p_date)
+{
+	cardNo = cNo;
+	strcpy(cardHolderName, dHname);
+	cvv = d_cvv;
+	strcpy(expiryDate, exDate);
+}
+void DebitCards::validateCardDetails()
+{
+}
+void DebitCards::displayTotalamount()
+{
+}
+void DebitCards::displayDebitCardDetails()
+{
+}
+DebitCards::~DebitCards()
+{
+}
